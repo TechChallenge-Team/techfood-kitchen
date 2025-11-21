@@ -1,8 +1,8 @@
 using System;
+using TechFood.Domain.Enums;
 using TechFood.Kitchen.Domain.Events.Preparation;
 using TechFood.Kitchen.Domain.Resources;
 using TechFood.Shared.Domain.Entities;
-using TechFood.Shared.Domain.Enums;
 using TechFood.Shared.Domain.Exceptions;
 
 namespace TechFood.Kitchen.Domain.Entities;

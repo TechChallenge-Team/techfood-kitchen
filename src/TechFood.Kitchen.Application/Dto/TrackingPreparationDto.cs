@@ -1,5 +1,5 @@
 using System;
-using TechFood.Shared.Domain.Enums;
+using TechFood.Domain.Enums;
 
 namespace TechFood.Application.Preparations.Dto;
 

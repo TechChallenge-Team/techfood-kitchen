@@ -40,6 +40,7 @@ internal class PreparationQueryProvider(
             PreparationStatusType.Pending,
             PreparationStatusType.Started
         };
+
         var products = await backofficeService.GetProductsAsync();
 
         var result = await kitchenContext.Orders
@@ -63,7 +64,6 @@ internal class PreparationQueryProvider(
             data.Preparation.Id,
             data.Order.Id,
             data.Order.Number,
-            data.Order.Amount,
             data.Preparation.CreatedAt,
             data.Preparation.StartedAt,
             data.Preparation.ReadyAt,

@@ -12,22 +12,22 @@ ARG BUILD_CONFIGURATION=Release
 ARG GITHUB_TOKEN
 ARG GITHUB_ACTOR
 WORKDIR /src
-COPY ["src/TechFood.Order.Api/TechFood.Order.Api.csproj", "TechFood.Order.Api/"]
-COPY ["src/TechFood.Order.Application/TechFood.Order.Application.csproj", "TechFood.Order.Application/"]
-COPY ["src/TechFood.Order.Contracts/TechFood.Order.Contracts.csproj", "TechFood.Order.Contracts/"]
-COPY ["src/TechFood.Order.Domain/TechFood.Order.Domain.csproj", "TechFood.Order.Domain/"]
-COPY ["src/TechFood.Order.Infra/TechFood.Order.Infra.csproj", "TechFood.Order.Infra/"]
+COPY ["src/TechFood.Kitchen.Api/TechFood.Kitchen.Api.csproj", "TechFood.Kitchen.Api/"]
+COPY ["src/TechFood.Kitchen.Application/TechFood.Kitchen.Application.csproj", "TechFood.Kitchen.Application/"]
+COPY ["src/TechFood.Kitchen.Contracts/TechFood.Kitchen.Contracts.csproj", "TechFood.Kitchen.Contracts/"]
+COPY ["src/TechFood.Kitchen.Domain/TechFood.Kitchen.Domain.csproj", "TechFood.Kitchen.Domain/"]
+COPY ["src/TechFood.Kitchen.Infra/TechFood.Kitchen.Infra.csproj", "TechFood.Kitchen.Infra/"]
 RUN dotnet nuget add source --username ${GITHUB_ACTOR} --password ${GITHUB_TOKEN} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/TechChallenge-Team/index.json"
-RUN dotnet restore "./TechFood.Order.Api/TechFood.Order.Api.csproj"
+RUN dotnet restore "./TechFood.Kitchen.Api/TechFood.Kitchen.Api.csproj"
 COPY src/ .
-WORKDIR /src/TechFood.Order.Api
-RUN dotnet build "./TechFood.Order.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR /src/TechFood.Kitchen.Api
+RUN dotnet build "./TechFood.Kitchen.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./TechFood.Order.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./TechFood.Kitchen.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "TechFood.Order.Api.dll"]
+ENTRYPOINT ["dotnet", "TechFood.Kitchen.Api.dll"]

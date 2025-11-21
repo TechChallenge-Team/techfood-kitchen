@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using TechFood.Domain.Enums;
 using TechFood.Kitchen.Domain.Entities;
-using TechFood.Shared.Domain.Enums;
 using TechFood.Shared.Infra.Persistence.Contexts;
 
 namespace TechFood.Kitchen.Infra.Persistence.Contexts;
@@ -10,6 +10,7 @@ namespace TechFood.Kitchen.Infra.Persistence.Contexts;
 public class KitchenContext : TechFoodContext
 {
     public DbSet<Preparation> Preparations { get; set; } = null!;
+
     public DbSet<Order> Orders { get; set; } = null!;
 
     public KitchenContext(DbContextOptions<KitchenContext> options) : base(options) { }
