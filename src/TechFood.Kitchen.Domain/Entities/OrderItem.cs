@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using TechFood.Shared.Domain.Entities;
 using TechFood.Shared.Domain.Validations;
 
 namespace TechFood.Kitchen.Domain.Entities;
 
+[ExcludeFromCodeCoverage]
 public class OrderItem : Entity
 {
     private OrderItem() { }

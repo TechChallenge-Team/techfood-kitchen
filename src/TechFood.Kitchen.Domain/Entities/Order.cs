@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using TechFood.Shared.Domain.Entities;
 
 namespace TechFood.Kitchen.Domain.Entities;
 
+[ExcludeFromCodeCoverage]
 public class Order : Entity, IAggregateRoot
 {
     private Order()
