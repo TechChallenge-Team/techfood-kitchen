@@ -1,4 +1,5 @@
-﻿using System.Threading;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using TechFood.Kitchen.Domain.Repositories;
@@ -7,6 +8,7 @@ using TechFood.Shared.Application.Exceptions;
 
 namespace TechFood.Kitchen.Application.Commands.StartPreparation;
 
+[ExcludeFromCodeCoverage]
 public class StartPreparationCommandHandler(IPreparationRepository repo) : IRequestHandler<StartPreparationCommand, Unit>
 {
     public async Task<Unit> Handle(StartPreparationCommand request, CancellationToken cancellationToken)

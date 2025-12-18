@@ -12,7 +12,7 @@ using TechFood.Kitchen.Infra.Persistence.Contexts;
 
 namespace TechFood.Kitchen.Infra.Persistence.Queries;
 
-internal class PreparationQueryProvider(
+public class PreparationQueryProvider(
     IBackofficeService backofficeService,
     KitchenContext kitchenContext) : IPreparationQueryProvider
 {
