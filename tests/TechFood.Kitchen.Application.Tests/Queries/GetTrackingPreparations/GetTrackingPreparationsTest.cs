@@ -25,13 +25,11 @@ namespace TechFood.Tests.Kitchen.Application.Queries.GetTrackingPreparations
                 new TrackingPreparationDto(
                     Guid.NewGuid(),
                     Guid.NewGuid(),
-                    1,
                     PreparationStatusType.Started
                 ),
                 new TrackingPreparationDto(
                     Guid.NewGuid(),
                     Guid.NewGuid(),
-                    2,
                     PreparationStatusType.Ready
                 )
             };

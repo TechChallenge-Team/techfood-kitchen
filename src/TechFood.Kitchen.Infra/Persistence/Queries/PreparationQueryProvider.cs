@@ -16,7 +16,7 @@ public class PreparationQueryProvider(
     IBackofficeService backofficeService,
     KitchenContext kitchenContext) : IPreparationQueryProvider
 {
-    
+
     public async Task<PreparationDto?> GetByIdAsync(Guid id)
     {
         return await kitchenContext.Preparations
@@ -43,50 +43,18 @@ public class PreparationQueryProvider(
 
         var products = await backofficeService.GetProductsAsync();
 
-        var result = await kitchenContext.Orders
-            .AsNoTracking()
-            .Include(order => order.Items)
-            .Join(
-                kitchenContext.Preparations,
-                order => order.Id,
-                preparation => preparation.OrderId,
-                (order, preparation) => new
-                {
-                    Order = order,
-                    Preparation = preparation
-                }
-            )
-            .Where(query => status.Contains(query.Preparation.Status))
-            .OrderBy(query => query.Preparation.CreatedAt)
-            .ToListAsync();
-
-        return result.Select(data => new DailyPreparationDto(
-            data.Preparation.Id,
-            data.Order.Id,
-            data.Order.Number,
-            data.Preparation.CreatedAt,
-            data.Preparation.StartedAt,
-            data.Preparation.ReadyAt,
-            data.Preparation.Status,
-            data.Order.Items.Select(item =>
-            {
-                var product = products.FirstOrDefault(p => p.Id == item.ProductId);
-                return new DailyPreparationItemDto(
-                    item.Id,
-                    product!.Name,
-                    item.Quantity);
-            }).ToList()))
+        return kitchenContext.Preparations.Select(data => new DailyPreparationDto(
+            data.Id,
+            data.OrderId,
+            data.CreatedAt,
+            data.StartedAt,
+            data.ReadyAt,
+            data.Status))
             .ToList();
     }
 
     public async Task<List<TrackingPreparationDto>> GetTrackingItemsAsync()
     {
-        var orderStatus = new OrderStatusType[]
-        {
-            OrderStatusType.Received,
-            OrderStatusType.InPreparation,
-            OrderStatusType.Ready
-        };
         var preparationStatus = new PreparationStatusType[]
         {
             PreparationStatusType.Pending,
@@ -94,27 +62,10 @@ public class PreparationQueryProvider(
             PreparationStatusType.Ready
         };
 
-        var result = await kitchenContext.Orders
-            .AsNoTracking()
-            .Join(
-                kitchenContext.Preparations,
-                order => order.Id,
-                preparation => preparation.OrderId,
-                (order, preparation) => new
-                {
-                    Order = order,
-                    Preparation = preparation
-                }
-            )
-            .Where(query =>
-                preparationStatus.Contains(query.Preparation.Status))
-            .ToListAsync();
-
-        return result.ConvertAll(data => new TrackingPreparationDto(
-            data.Preparation.Id,
-            data.Order.Id,
-            data.Order.Number,
-            data.Preparation.Status
-            ));
+        return kitchenContext.Preparations.Select(data => new TrackingPreparationDto(
+            data.Id,
+            data.OrderId,
+            data.Status
+            )).ToList();
     }
 }
