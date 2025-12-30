@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using TechFood.Kitchen.Application.Dto;
-using TechFood.Kitchen.Application.Queries.GetDailyPreparations;
 using TechFood.Kitchen.Application.Services.Interfaces;
 using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Infra.Persistence.Contexts;
@@ -21,10 +20,9 @@ public class PreparationQueryProviderTest
 
         await using var context = new KitchenContext(options);
 
-        var order = new Order(1, DateTime.UtcNow);
-        await context.Orders.AddAsync(order);
+        var preparationId = Guid.NewGuid();
 
-        var preparation = new Preparation(order.Id);
+        var preparation = new Preparation(preparationId);
         await context.Preparations.AddAsync(preparation);
 
         await context.SaveChangesAsync();
@@ -78,10 +76,9 @@ public class PreparationQueryProviderTest
 
         await using var context = new KitchenContext(options);
 
-        var order = new Order(10, DateTime.UtcNow);
-        await context.Orders.AddAsync(order);
+        var preparationId = Guid.NewGuid();
 
-        var preparation = new Preparation(order.Id);
+        var preparation = new Preparation(preparationId);
         await context.Preparations.AddAsync(preparation);
 
         await context.SaveChangesAsync();
@@ -102,9 +99,7 @@ public class PreparationQueryProviderTest
         var dto = result.First();
 
         Assert.Equal(preparation.Id, dto.Id);
-        Assert.Equal(order.Id, dto.OrderId);
-        Assert.Equal(order.Number, dto.Number);
-        Assert.Empty(dto.Items);
+        Assert.Equal(preparationId, dto.OrderId);
     }
 
 
@@ -118,10 +113,9 @@ public class PreparationQueryProviderTest
 
         await using var context = new KitchenContext(options);
 
-        var order = new Order(5, DateTime.UtcNow);
-        await context.Orders.AddAsync(order);
+        var preparationId = Guid.NewGuid();
 
-        var preparation = new Preparation(order.Id);
+        var preparation = new Preparation(preparationId);
         await context.Preparations.AddAsync(preparation);
 
         await context.SaveChangesAsync();
@@ -142,8 +136,7 @@ public class PreparationQueryProviderTest
         var tracking = result.First();
 
         Assert.Equal(preparation.Id, tracking.Id);
-        Assert.Equal(order.Id, tracking.OrderId);
-        Assert.Equal(order.Number, tracking.Number);
+        Assert.Equal(preparationId, tracking.OrderId);
         Assert.Equal(preparation.Status, tracking.Status);
     }
 }

@@ -19,11 +19,11 @@ namespace TechFood.Tests.Kitchen.Infra.Repositories
 
             var repository = new PreparationRepository(context);
 
-            var order = new Order(1, DateTime.UtcNow);
-            await context.Orders.AddAsync(order);
+            var preparationId = Guid.NewGuid();
+
             await context.SaveChangesAsync();
 
-            var preparation = new Preparation(order.Id);
+            var preparation = new Preparation(preparationId);
 
             // Act
             var returnedId = await repository.AddAsync(preparation);
@@ -47,10 +47,9 @@ namespace TechFood.Tests.Kitchen.Infra.Repositories
 
             await using var context = new KitchenContext(options);
 
-            var order = new Order(2, DateTime.UtcNow);
-            await context.Orders.AddAsync(order);
+            var preparationId = Guid.NewGuid();
 
-            var preparation = new Preparation(order.Id);
+            var preparation = new Preparation(preparationId);
             await context.Preparations.AddAsync(preparation);
             await context.SaveChangesAsync();
 
@@ -74,17 +73,15 @@ namespace TechFood.Tests.Kitchen.Infra.Repositories
 
             await using var context = new KitchenContext(options);
 
-            var order = new Order(3, DateTime.UtcNow);
-            await context.Orders.AddAsync(order);
-
-            var preparation = new Preparation(order.Id);
+            var preparationId = Guid.NewGuid();
+            var preparation = new Preparation(preparationId);
             await context.Preparations.AddAsync(preparation);
             await context.SaveChangesAsync();
 
             var repository = new PreparationRepository(context);
 
             // Act
-            var found = await repository.GetByOrderIdAsync(order.Id);
+            var found = await repository.GetByOrderIdAsync(preparationId);
 
             // Assert
             Assert.NotNull(found);

@@ -11,8 +11,6 @@ public class KitchenContext : TechFoodContext
 {
     public DbSet<Preparation> Preparations { get; set; } = null!;
 
-    public DbSet<Order> Orders { get; set; } = null!;
-
     public KitchenContext(DbContextOptions<KitchenContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -94,16 +92,6 @@ public class KitchenContext : TechFoodContext
                     IsDeleted = false
                 }
             );
-
-        //modelBuilder.Entity<PaymentType>()
-        //    .HasData(
-        //        new { Id = 1, Code = "MCMA", Description = "Mastercard" },
-        //        new { Id = 2, Code = "VIS", Description = "Visa" },
-        //        new { Id = 3, Code = "ELO", Description = "Elo" },
-        //        new { Id = 4, Code = "DNR", Description = "Sodexo" },
-        //        new { Id = 5, Code = "VR", Description = "Vale Refeição" },
-        //        new { Id = 6, Code = "PIX", Description = "Pix" }
-        //    );
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
