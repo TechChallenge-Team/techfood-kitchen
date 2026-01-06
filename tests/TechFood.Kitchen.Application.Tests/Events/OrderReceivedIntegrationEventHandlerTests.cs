@@ -7,12 +7,12 @@ namespace TechFood.Kitchen.Application.Tests.Events;
 public class OrderReceivedIntegrationEventHandlerTests
 {
     private readonly Mock<IPreparationRepository> _mockRepository;
-    private readonly OrderReceivedIntegrationEventHandler _handler;
+    private readonly OrderReceivedEventHandler _handler;
 
     public OrderReceivedIntegrationEventHandlerTests()
     {
         _mockRepository = new Mock<IPreparationRepository>();
-        _handler = new OrderReceivedIntegrationEventHandler(_mockRepository.Object);
+        _handler = new OrderReceivedEventHandler(_mockRepository.Object);
     }
 
     [Fact(DisplayName = "Should create preparation when order received event is handled")]
@@ -21,7 +21,7 @@ public class OrderReceivedIntegrationEventHandlerTests
     {
         // Arrange
         var orderId = Guid.NewGuid();
-        var integrationEvent = new OrderReceivedIntegrationEvent(orderId);
+        var integrationEvent = new OrderReceivedEvent(orderId);
         var cancellationToken = CancellationToken.None;
 
         _mockRepository
@@ -42,7 +42,7 @@ public class OrderReceivedIntegrationEventHandlerTests
     {
         // Arrange
         var orderId = Guid.NewGuid();
-        var integrationEvent = new OrderReceivedIntegrationEvent(orderId);
+        var integrationEvent = new OrderReceivedEvent(orderId);
         var cancellationToken = CancellationToken.None;
         Preparation? capturedPreparation = null;
 

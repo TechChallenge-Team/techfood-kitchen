@@ -8,13 +8,11 @@ using TechFood.Shared.Application.Events;
 
 namespace TechFood.Kitchen.Application.Events.Integration.Incoming.Handlers;
 
-public record OrderReceivedIntegrationEvent(Guid OrderId) : IIntegrationEvent;
+public record OrderReceivedEvent(Guid OrderId) : IIntegrationEvent;
 
-internal class OrderReceivedIntegrationEventHandler(
-    IPreparationRepository preparationRepo)
-    : INotificationHandler<OrderReceivedIntegrationEvent>
+internal class OrderReceivedEventHandler(IPreparationRepository preparationRepo) : INotificationHandler<OrderReceivedEvent>
 {
-    public async Task Handle(OrderReceivedIntegrationEvent notification, CancellationToken cancellationToken)
+    public async Task Handle(OrderReceivedEvent notification, CancellationToken cancellationToken)
     {
         var preparation = new Preparation(notification.OrderId);
 

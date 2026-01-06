@@ -24,7 +24,7 @@ public class CompletePreparationCommandHandler(
 
         preparation.Ready();
 
-        await mediator.Publish(new PreparationDoneIntegrationEvent(preparation.OrderId), cancellationToken);
+        await mediator.Publish(new PreparationDoneEvent(preparation.OrderId), cancellationToken);
 
         return Unit.Value;
     }

@@ -3,9 +3,9 @@ using TechFood.Shared.Application.Events;
 
 namespace TechFood.Kitchen.Application.Events.Integration.Outgoing;
 
-public class PreparationStartedIntegrationEvent : IIntegrationEvent
+public class PreparationEvents : IIntegrationEvent
 {
-    public PreparationStartedIntegrationEvent(Guid orderId)
+    public PreparationEvents(Guid orderId)
     {
         OrderId = orderId;
     }
@@ -13,9 +13,9 @@ public class PreparationStartedIntegrationEvent : IIntegrationEvent
     public Guid OrderId { get; set; }
 }
 
-public class PreparationDoneIntegrationEvent : IIntegrationEvent
+public class PreparationDoneEvent : IIntegrationEvent
 {
-    public PreparationDoneIntegrationEvent(Guid orderId)
+    public PreparationDoneEvent(Guid orderId)
     {
         OrderId = orderId;
     }
