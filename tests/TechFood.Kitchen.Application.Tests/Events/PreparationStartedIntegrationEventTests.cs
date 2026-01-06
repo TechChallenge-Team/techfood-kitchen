@@ -1,4 +1,5 @@
 using TechFood.Kitchen.Application.Events;
+using TechFood.Kitchen.Application.Events.Integration.Outgoing;
 
 namespace TechFood.Kitchen.Application.Tests.Events;
 

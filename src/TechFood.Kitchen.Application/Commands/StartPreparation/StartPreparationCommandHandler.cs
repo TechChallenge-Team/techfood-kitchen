@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using TechFood.Kitchen.Application.Events;
+using TechFood.Kitchen.Application.Events.Integration.Outgoing;
 using TechFood.Kitchen.Domain.Repositories;
 using TechFood.Kitchen.Domain.Resources;
 using TechFood.Shared.Application.Exceptions;

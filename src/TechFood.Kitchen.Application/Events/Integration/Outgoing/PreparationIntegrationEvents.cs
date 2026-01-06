@@ -1,7 +1,7 @@
 using System;
 using TechFood.Shared.Application.Events;
 
-namespace TechFood.Kitchen.Application.Events;
+namespace TechFood.Kitchen.Application.Events.Integration.Outgoing;
 
 public class PreparationStartedIntegrationEvent : IIntegrationEvent
 {
