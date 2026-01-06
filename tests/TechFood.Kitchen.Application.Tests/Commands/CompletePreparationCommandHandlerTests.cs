@@ -36,7 +36,7 @@ public class CompletePreparationCommandHandlerTests
             .ReturnsAsync(preparation);
 
         _mockMediator
-            .Setup(m => m.Publish(It.IsAny<PreparationDoneIntegrationEvent>(), cancellationToken))
+            .Setup(m => m.Publish(It.IsAny<PreparationDoneEvent>(), cancellationToken))
             .Returns(Task.CompletedTask);
 
         // Act
@@ -46,7 +46,7 @@ public class CompletePreparationCommandHandlerTests
         result.Should().Be(Unit.Value);
         _mockRepository.Verify(r => r.GetByIdAsync(preparationId), Times.Once);
         _mockMediator.Verify(m => m.Publish(
-            It.Is<PreparationDoneIntegrationEvent>(e => e.OrderId == orderId),
+            It.Is<PreparationDoneEvent>(e => e.OrderId == orderId),
             cancellationToken), Times.Once);
     }
 
@@ -70,7 +70,7 @@ public class CompletePreparationCommandHandlerTests
         await act.Should().ThrowAsync<TechFood.Shared.Application.Exceptions.ApplicationException>();
         _mockRepository.Verify(r => r.GetByIdAsync(preparationId), Times.Once);
         _mockMediator.Verify(m => m.Publish(
-            It.IsAny<PreparationDoneIntegrationEvent>(),
+            It.IsAny<PreparationDoneEvent>(),
             It.IsAny<CancellationToken>()), Times.Never);
     }
 
@@ -85,15 +85,15 @@ public class CompletePreparationCommandHandlerTests
         preparation.Start(); 
         var command = new CompletePreparationCommand(preparationId);
         var cancellationToken = CancellationToken.None;
-        PreparationDoneIntegrationEvent? publishedEvent = null;
+        PreparationDoneEvent? publishedEvent = null;
 
         _mockRepository
             .Setup(r => r.GetByIdAsync(preparationId))
             .ReturnsAsync(preparation);
 
         _mockMediator
-            .Setup(m => m.Publish(It.IsAny<PreparationDoneIntegrationEvent>(), cancellationToken))
-            .Callback<INotification, CancellationToken>((e, _) => publishedEvent = e as PreparationDoneIntegrationEvent)
+            .Setup(m => m.Publish(It.IsAny<PreparationDoneEvent>(), cancellationToken))
+            .Callback<INotification, CancellationToken>((e, _) => publishedEvent = e as PreparationDoneEvent)
             .Returns(Task.CompletedTask);
 
         // Act
