@@ -1,5 +1,4 @@
 using TechFood.Kitchen.Application.Events;
-using TechFood.Shared.Domain.Enums;
 
 namespace TechFood.Kitchen.Application.Tests.Events;
 
@@ -17,21 +16,6 @@ public class PreparationStartedIntegrationEventTests
 
         // Assert
         integrationEvent.OrderId.Should().Be(orderId);
-        integrationEvent.OrderStatus.Should().Be(OrderStatusType.InPreparation);
-    }
-
-    [Fact(DisplayName = "Should set order status to InPreparation")]
-    [Trait("Application", "PreparationStartedIntegrationEvent")]
-    public void Ctor_ShouldSetOrderStatusToInPreparation()
-    {
-        // Arrange
-        var orderId = Guid.NewGuid();
-
-        // Act
-        var integrationEvent = new PreparationStartedIntegrationEvent(orderId);
-
-        // Assert
-        integrationEvent.OrderStatus.Should().Be(OrderStatusType.InPreparation);
     }
 
     [Fact(DisplayName = "Should maintain order id after initialization")]
