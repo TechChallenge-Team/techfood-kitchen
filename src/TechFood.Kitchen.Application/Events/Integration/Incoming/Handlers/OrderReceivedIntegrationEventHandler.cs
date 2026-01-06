@@ -6,7 +6,7 @@ using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Domain.Repositories;
 using TechFood.Shared.Application.Events;
 
-namespace TechFood.Kitchen.Application.Events;
+namespace TechFood.Kitchen.Application.Events.Integration.Incoming.Handlers;
 
 public record OrderReceivedIntegrationEvent(Guid OrderId) : IIntegrationEvent;
 

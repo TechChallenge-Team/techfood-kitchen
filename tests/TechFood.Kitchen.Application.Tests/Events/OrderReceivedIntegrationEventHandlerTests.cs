@@ -1,4 +1,4 @@
-using TechFood.Kitchen.Application.Events;
+using TechFood.Kitchen.Application.Events.Integration.Incoming.Handlers;
 using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Domain.Repositories;
 

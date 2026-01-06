@@ -1,6 +1,6 @@
 using MediatR;
 using TechFood.Kitchen.Application.Commands.CompletePreparation;
-using TechFood.Kitchen.Application.Events;
+using TechFood.Kitchen.Application.Events.Integration.Outgoing;
 using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Domain.Repositories;
 
