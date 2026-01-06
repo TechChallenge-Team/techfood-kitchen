@@ -11,7 +11,7 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="TechFood.Shared.Application" Version="0.2.4-rc" />
+    <PackageReference Include="TechFood.Shared.Application" Version="0.2.7-rc" />
   </ItemGroup>
 
   <ItemGroup>

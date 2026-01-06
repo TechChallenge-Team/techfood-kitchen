@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="TechFood.Shared.Worker" Version="0.2.4-rc" />
+    <PackageReference Include="TechFood.Shared.Worker" Version="0.2.7-rc" />
   </ItemGroup>
 
   <ItemGroup>

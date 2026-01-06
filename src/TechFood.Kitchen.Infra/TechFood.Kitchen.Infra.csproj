@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.4" />
-    <PackageReference Include="TechFood.Shared.Infra" Version="0.2.4-rc" />
+    <PackageReference Include="TechFood.Shared.Infra" Version="0.2.7-rc" />
   </ItemGroup>
 
   <ItemGroup>

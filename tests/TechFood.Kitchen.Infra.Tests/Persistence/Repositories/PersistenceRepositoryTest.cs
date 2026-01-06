@@ -1,38 +1,48 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Infra.Persistence.Contexts;
 using TechFood.Kitchen.Infra.Persistence.Repositories;
+using TechFood.Shared.Infra.Extensions;
 
 namespace TechFood.Tests.Kitchen.Infra.Repositories
 {
     public class PreparationRepositoryTest
     {
-        [Fact]
-        public async Task AddAsync_ShouldReturnId_AndPersistPreparation()
+        private readonly KitchenContext _context;
+
+        public PreparationRepositoryTest()
         {
-            // Arrange
+            // IOptions of InfraOptions is not needed for in-memory tests
+            var infraOptions = Options.Create(new InfraOptions());
+
             var options = new DbContextOptionsBuilder<KitchenContext>()
                 .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
                 .Options;
 
-            await using var context = new KitchenContext(options);
+            _context = new KitchenContext(infraOptions, options);
+        }
 
-            var repository = new PreparationRepository(context);
+        [Fact]
+        public async Task AddAsync_ShouldReturnId_AndPersistPreparation()
+        {
+            // Arrange
+            var repository = new PreparationRepository(_context);
 
             var preparationId = Guid.NewGuid();
 
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             var preparation = new Preparation(preparationId);
 
             // Act
             var returnedId = await repository.AddAsync(preparation);
-            await context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
 
             // Assert
             Assert.Equal(preparation.Id, returnedId);
 
-            var persisted = await context.Preparations.FirstOrDefaultAsync(p => p.Id == preparation.Id);
+            var persisted = await _context.Preparations.FirstOrDefaultAsync(p => p.Id == preparation.Id);
             Assert.NotNull(persisted);
             Assert.Equal(preparation.OrderId, persisted!.OrderId);
         }
@@ -41,19 +51,13 @@ namespace TechFood.Tests.Kitchen.Infra.Repositories
         public async Task GetByIdAsync_ShouldReturnPreparation_WhenExists()
         {
             // Arrange
-            var options = new DbContextOptionsBuilder<KitchenContext>()
-                .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
-                .Options;
-
-            await using var context = new KitchenContext(options);
-
             var preparationId = Guid.NewGuid();
 
             var preparation = new Preparation(preparationId);
-            await context.Preparations.AddAsync(preparation);
-            await context.SaveChangesAsync();
+            await _context.Preparations.AddAsync(preparation);
+            await _context.SaveChangesAsync();
 
-            var repository = new PreparationRepository(context);
+            var repository = new PreparationRepository(_context);
 
             // Act
             var found = await repository.GetByIdAsync(preparation.Id);
@@ -67,18 +71,12 @@ namespace TechFood.Tests.Kitchen.Infra.Repositories
         public async Task GetByOrderIdAsync_ShouldReturnPreparation_WhenExists()
         {
             // Arrange
-            var options = new DbContextOptionsBuilder<KitchenContext>()
-                .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
-                .Options;
-
-            await using var context = new KitchenContext(options);
-
             var preparationId = Guid.NewGuid();
             var preparation = new Preparation(preparationId);
-            await context.Preparations.AddAsync(preparation);
-            await context.SaveChangesAsync();
+            await _context.Preparations.AddAsync(preparation);
+            await _context.SaveChangesAsync();
 
-            var repository = new PreparationRepository(context);
+            var repository = new PreparationRepository(_context);
 
             // Act
             var found = await repository.GetByOrderIdAsync(preparationId);
