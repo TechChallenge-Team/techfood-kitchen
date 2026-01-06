@@ -1,8 +1,10 @@
 using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using TechFood.Domain.Enums;
 using TechFood.Kitchen.Domain.Entities;
+using TechFood.Shared.Infra.Extensions;
 using TechFood.Shared.Infra.Persistence.Contexts;
 
 namespace TechFood.Kitchen.Infra.Persistence.Contexts;
@@ -11,7 +13,10 @@ public class KitchenContext : TechFoodContext
 {
     public DbSet<Preparation> Preparations { get; set; } = null!;
 
-    public KitchenContext(DbContextOptions<KitchenContext> options) : base(options) { }
+    public KitchenContext(
+        IOptions<InfraOptions> infraOptions,
+        DbContextOptions<KitchenContext> options
+            ) : base(infraOptions, options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

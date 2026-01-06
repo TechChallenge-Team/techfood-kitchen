@@ -1,37 +1,47 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Moq;
 using TechFood.Kitchen.Application.Dto;
 using TechFood.Kitchen.Application.Services.Interfaces;
 using TechFood.Kitchen.Domain.Entities;
 using TechFood.Kitchen.Infra.Persistence.Contexts;
 using TechFood.Kitchen.Infra.Persistence.Queries;
+using TechFood.Shared.Infra.Extensions;
 
 namespace TechFood.Tests.Kitchen.Infra.Queries;
 
 public class PreparationQueryProviderTest
 {
-    [Fact]
-    public async Task GetByIdAsync_ShouldReturnDto_WhenPreparationExists()
+    private readonly KitchenContext _context;
+
+    public PreparationQueryProviderTest()
     {
-        // Arrange
+        // IOptions of InfraOptions is not needed for in-memory tests
+        var infraOptions = Options.Create(new InfraOptions());
+
         var options = new DbContextOptionsBuilder<KitchenContext>()
             .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
             .Options;
 
-        await using var context = new KitchenContext(options);
+        _context = new KitchenContext(infraOptions, options);
+    }
 
+    [Fact]
+    public async Task GetByIdAsync_ShouldReturnDto_WhenPreparationExists()
+    {
+        // Arrange
         var preparationId = Guid.NewGuid();
 
         var preparation = new Preparation(preparationId);
-        await context.Preparations.AddAsync(preparation);
+        await _context.Preparations.AddAsync(preparation);
 
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
         var backofficeMock = new Mock<IBackofficeService>();
         backofficeMock.Setup(x => x.GetProductsAsync(default))
                      .ReturnsAsync(Array.Empty<ProductDto>());
 
-        var provider = new PreparationQueryProvider(backofficeMock.Object, context);
+        var provider = new PreparationQueryProvider(backofficeMock.Object, _context);
 
         // Act
         var result = await provider.GetByIdAsync(preparation.Id);
@@ -47,17 +57,11 @@ public class PreparationQueryProviderTest
     public async Task GetByIdAsync_ShouldReturnNull_WhenNotFound()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<KitchenContext>()
-            .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
-            .Options;
-
-        await using var context = new KitchenContext(options);
-
         var backofficeMock = new Mock<IBackofficeService>();
         backofficeMock.Setup(x => x.GetProductsAsync(default))
                      .ReturnsAsync(Array.Empty<ProductDto>());
 
-        var provider = new PreparationQueryProvider(backofficeMock.Object, context);
+        var provider = new PreparationQueryProvider(backofficeMock.Object, _context);
 
         // Act
         var result = await provider.GetByIdAsync(Guid.NewGuid());
@@ -70,24 +74,18 @@ public class PreparationQueryProviderTest
     public async Task GetDailyPreparationsAsync_ShouldReturnDailyDtos_WithEmptyItems_WhenNoOrderItems()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<KitchenContext>()
-            .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
-            .Options;
-
-        await using var context = new KitchenContext(options);
-
         var preparationId = Guid.NewGuid();
 
         var preparation = new Preparation(preparationId);
-        await context.Preparations.AddAsync(preparation);
+        await _context.Preparations.AddAsync(preparation);
 
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
         var backofficeMock = new Mock<IBackofficeService>();
         backofficeMock.Setup(x => x.GetProductsAsync(default))
             .ReturnsAsync(Array.Empty<ProductDto>());
 
-        var provider = new PreparationQueryProvider(backofficeMock.Object, context);
+        var provider = new PreparationQueryProvider(backofficeMock.Object, _context);
 
         // Act
         var result = await provider.GetDailyPreparationsAsync();
@@ -107,24 +105,18 @@ public class PreparationQueryProviderTest
     public async Task GetTrackingItemsAsync_ShouldReturnTrackingDtos()
     {
         // Arrange
-        var options = new DbContextOptionsBuilder<KitchenContext>()
-            .UseInMemoryDatabase($"db_{Guid.NewGuid()}")
-            .Options;
-
-        await using var context = new KitchenContext(options);
-
         var preparationId = Guid.NewGuid();
 
         var preparation = new Preparation(preparationId);
-        await context.Preparations.AddAsync(preparation);
+        await _context.Preparations.AddAsync(preparation);
 
-        await context.SaveChangesAsync();
+        await _context.SaveChangesAsync();
 
         var backofficeMock = new Mock<IBackofficeService>();
         backofficeMock.Setup(x => x.GetProductsAsync(default))
             .ReturnsAsync(Array.Empty<ProductDto>());
 
-        var provider = new PreparationQueryProvider(backofficeMock.Object, context);
+        var provider = new PreparationQueryProvider(backofficeMock.Object, _context);
 
         // Act
         var result = await provider.GetTrackingItemsAsync();
