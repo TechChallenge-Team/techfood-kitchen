@@ -19,6 +19,11 @@ public class StartPreparationCommandHandler(IPreparationRepository repo) : IRequ
 
         preparation.Start();
 
+<<<<<<< Updated upstream
+=======
+        await mediator.Publish(new PreparationStartedEvent(preparation.OrderId), cancellationToken);
+
+>>>>>>> Stashed changes
         return Unit.Value;
     }
 }
