@@ -13,7 +13,7 @@ public class PreparationStartedIntegrationEventTests
         var orderId = Guid.NewGuid();
 
         // Act
-        var integrationEvent = new PreparationEvents(orderId);
+        var integrationEvent = new PreparationDoneEvent(orderId);
 
         // Assert
         integrationEvent.OrderId.Should().Be(orderId);
@@ -25,7 +25,7 @@ public class PreparationStartedIntegrationEventTests
     {
         // Arrange
         var orderId = Guid.NewGuid();
-        var integrationEvent = new PreparationEvents(orderId);
+        var integrationEvent = new PreparationDoneEvent(orderId);
 
         // Act
         var retrievedOrderId = integrationEvent.OrderId;
