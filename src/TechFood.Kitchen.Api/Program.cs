@@ -26,7 +26,7 @@ var app = builder.Build();
 {
     app.RunMigration<KitchenContext>();
 
-    app.UsePathBase("/kitchen");
+    app.UsePathBase("/api/kitchen");
 
     app.UseForwardedHeaders();
 
