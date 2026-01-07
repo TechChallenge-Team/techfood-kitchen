@@ -2,7 +2,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using TechFood.Kitchen.Application.Events;
 using TechFood.Kitchen.Application.Events.Integration.Outgoing;
 using TechFood.Kitchen.Domain.Repositories;
 using TechFood.Kitchen.Domain.Resources;
@@ -20,7 +19,9 @@ public class StartPreparationCommandHandler(
         var preparation = await repo.GetByIdAsync(request.Id);
 
         if (preparation == null)
+        {
             throw new ApplicationException(Exceptions.Preparation_PreparationNotFound);
+        }
 
         preparation.Start();
 
