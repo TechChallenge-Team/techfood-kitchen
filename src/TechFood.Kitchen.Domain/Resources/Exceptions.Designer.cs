@@ -61,133 +61,7 @@ namespace TechFood.Kitchen.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Payment amount is not equal to the order total amount..
-        /// </summary>
-        public static string Order_AmountIsNotEqualOrderAmount {
-            get {
-                return ResourceManager.GetString("Order_AmountIsNotEqualOrderAmount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot add items to an order that is not in the Pending status..
-        /// </summary>
-        public static string Order_CannotAddItemToNonPendingStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotAddItemToNonPendingStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot apply discount to an order that is not in the Pending status..
-        /// </summary>
-        public static string Order_CannotApplyDiscountToNonPendingStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotApplyDiscountToNonPendingStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot deliver an order that is not in the Ready status..
-        /// </summary>
-        public static string Order_CannotDeliverToNonReadyStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotDeliverToNonReadyStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot prepare an order that is not in the Received status..
-        /// </summary>
-        public static string Order_CannotPrepareToNonReceivedStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotPrepareToNonReceivedStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot ready an order that is not in the InPreparation status..
-        /// </summary>
-        public static string Order_CannotReadyToNonInPreparationStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotReadyToNonInPreparationStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot receive an order that is not in the Pending status..
-        /// </summary>
-        public static string Order_CannotReceiveToNonPendingStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotReceiveToNonPendingStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cannot remove items from an order that is not in the Pending status..
-        /// </summary>
-        public static string Order_CannotRemoveItemToNonPendingStatus {
-            get {
-                return ResourceManager.GetString("Order_CannotRemoveItemToNonPendingStatus", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discount cannot be negative..
-        /// </summary>
-        public static string Order_DiscountCannotBeNegative {
-            get {
-                return ResourceManager.GetString("Order_DiscountCannotBeNegative", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Order item not found..
-        /// </summary>
-        public static string Order_ItemNotFound {
-            get {
-                return ResourceManager.GetString("Order_ItemNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Payment cannot be null..
-        /// </summary>
-        public static string Order_PaymentIsNull {
-            get {
-                return ResourceManager.GetString("Order_PaymentIsNull", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The ProductId is not valid.
-        /// </summary>
-        public static string OrderItem_ThrowProductIdIsInvalid {
-            get {
-                return ResourceManager.GetString("OrderItem_ThrowProductIdIsInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The OrdemItem quantity have be greater than zero.
-        /// </summary>
-        public static string OrderItem_ThrowQuantityGreaterThanZero {
-            get {
-                return ResourceManager.GetString("OrderItem_ThrowQuantityGreaterThanZero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The orderItem UnitPrice have be greater than zero.
-        /// </summary>
-        public static string OrderItem_ThrowUnitPriceGreaterThanZero {
-            get {
-                return ResourceManager.GetString("OrderItem_ThrowUnitPriceGreaterThanZero", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preparation is already cancelled..
+        ///   Looks up a localized string similar to The preparation is already cancelled..
         /// </summary>
         public static string Preparation_AlreadyCancelled {
             get {
@@ -196,33 +70,25 @@ namespace TechFood.Kitchen.Domain.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparation can only be complete if it is in progress..
+        ///   Looks up a localized string similar to The preparation can only be marked as ready if it is in started status..
         /// </summary>
-        public static string Preparation_CanOnlyCompleteIfInProgress {
+        public static string Preparation_CannotBeReady {
             get {
-                return ResourceManager.GetString("Preparation_CanOnlyCompleteIfInProgress", resourceCulture);
+                return ResourceManager.GetString("Preparation_CannotBeReady", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparation can only be deliver if it is completed..
+        ///   Looks up a localized string similar to The preparation can only be started if it is in pending status..
         /// </summary>
-        public static string Preparation_CanOnlyDeliverIfCompleted {
+        public static string Preparation_CannotBeStarted {
             get {
-                return ResourceManager.GetString("Preparation_CanOnlyDeliverIfCompleted", resourceCulture);
+                return ResourceManager.GetString("Preparation_CannotBeStarted", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Preparation can only be started if it is pending..
-        /// </summary>
-        public static string Preparation_CanOnlyStartIfInPending {
-            get {
-                return ResourceManager.GetString("Preparation_CanOnlyStartIfInPending", resourceCulture);
-            }
-        }
-        /// <summary>
-        ///   Looks up a localized string similar to Preparation not found..
+        ///   Looks up a localized string similar to The preparation was not found..
         /// </summary>
         public static string Preparation_PreparationNotFound {
             get {

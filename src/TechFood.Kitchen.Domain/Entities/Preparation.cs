@@ -41,7 +41,7 @@ public class Preparation : Entity, IAggregateRoot
     {
         if (Status != PreparationStatusType.Pending)
         {
-            throw new DomainException(Exceptions.Preparation_CanOnlyStartIfInPending);
+            throw new DomainException(Exceptions.Preparation_CannotBeStarted);
         }
 
         Status = PreparationStatusType.Started;
@@ -57,7 +57,7 @@ public class Preparation : Entity, IAggregateRoot
     {
         if (Status != PreparationStatusType.Started)
         {
-            throw new DomainException(Resources.Exceptions.Preparation_CanOnlyCompleteIfInProgress);
+            throw new DomainException(Exceptions.Preparation_CannotBeReady);
         }
 
         Status = PreparationStatusType.Ready;
@@ -73,7 +73,7 @@ public class Preparation : Entity, IAggregateRoot
     {
         if (Status == PreparationStatusType.Cancelled)
         {
-            throw new InvalidOperationException(Resources.Exceptions.Preparation_AlreadyCancelled);
+            throw new InvalidOperationException(Exceptions.Preparation_AlreadyCancelled);
         }
 
         Status = PreparationStatusType.Cancelled;

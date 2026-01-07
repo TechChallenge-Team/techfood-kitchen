@@ -117,46 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Order_AmountIsNotEqualOrderAmount" xml:space="preserve">
-    <value>Payment amount is not equal to the order total amount.</value>
+  <data name="Preparation_AlreadyCancelled" xml:space="preserve">
+    <value>The preparation is already cancelled.</value>
   </data>
-  <data name="Order_CannotAddItemToNonPendingStatus" xml:space="preserve">
-    <value>Cannot add items to an order that is not in the Pending status.</value>
+  <data name="Preparation_CannotBeReady" xml:space="preserve">
+    <value>The preparation can only be marked as ready if it is in started status.</value>
   </data>
-  <data name="Order_CannotApplyDiscountToNonPendingStatus" xml:space="preserve">
-    <value>Cannot apply discount to an order that is not in the Pending status.</value>
+  <data name="Preparation_CannotBeStarted" xml:space="preserve">
+    <value>The preparation can only be started if it is in pending status.</value>
   </data>
-  <data name="Order_CannotRemoveItemToNonPendingStatus" xml:space="preserve">
-    <value>Cannot remove items from an order that is not in the Pending status.</value>
-  </data>
-  <data name="Order_DiscountCannotBeNegative" xml:space="preserve">
-    <value>Discount cannot be negative.</value>
-  </data>
-  <data name="Order_ItemNotFound" xml:space="preserve">
-    <value>Order item not found.</value>
-  </data>
-  <data name="Order_PaymentIsNull" xml:space="preserve">
-    <value>Payment cannot be null.</value>
-  </data>
-  <data name="OrderItem_ThrowUnitPriceGreaterThanZero" xml:space="preserve">
-    <value>The orderItem UnitPrice have be greater than zero</value>
-  </data>
-  <data name="OrderItem_ThrowQuantityGreaterThanZero" xml:space="preserve">
-    <value>The OrdemItem quantity have be greater than zero</value>
-  </data>
-  <data name="OrderItem_ThrowProductIdIsInvalid" xml:space="preserve">
-    <value>The ProductId is not valid</value>
-  </data>
-  <data name="Order_CannotDeliverToNonReadyStatus" xml:space="preserve">
-    <value>Cannot deliver an order that is not in the Ready status.</value>
-  </data>
-  <data name="Order_CannotPrepareToNonReceivedStatus" xml:space="preserve">
-    <value>Cannot prepare an order that is not in the Received status.</value>
-  </data>
-  <data name="Order_CannotReadyToNonInPreparationStatus" xml:space="preserve">
-    <value>Cannot ready an order that is not in the InPreparation status.</value>
-  </data>
-  <data name="Order_CannotReceiveToNonPendingStatus" xml:space="preserve">
-    <value>Cannot receive an order that is not in the Pending status.</value>
+  <data name="Preparation_PreparationNotFound" xml:space="preserve">
+    <value>The preparation was not found.</value>
   </data>
 </root>
